@@ -1,24 +1,10 @@
 import express from "express";
-import { octokit } from "../services/github";
+
+import { repoNameFormatMiddleware } from "../middlewares/repo-name-format";
+import { scanController } from "../controllers/scan";
 
 const scanRouter = express.Router();
 
-scanRouter.post<{ repo: string }>("/scan", async (req, res) => {
-  const { repo } = req.body;
-
-  console.log(`Received scan request for repository: ${repo}`);
-
-  const issues = await octokit.rest.issues.listForRepo({
-    owner: "google",
-    repo: "mcp",
-    state: "open",
-    per_page: 100
-  });
-
-  console.log(`Fetched ${issues.data.length} issues from GitHub repository.`);
-  // console.log(issues.data);
-
-  res.status(200).json({ msg: "ok" });
-});
+scanRouter.post("/scan", repoNameFormatMiddleware, scanController);
 
 export { scanRouter };

@@ -10,13 +10,22 @@ datasource db {
   provider = "sqlite"
 }
 
+model Repository {
+  id     String  @id @default(cuid())
+  owner  String
+  name   String  @unique
+  issues Issue[]
+}
+
 model Issue {
-  id             String   @id @default(cuid())
-  githubId       Int      @unique
+  id             String      @id @default(cuid())
+  githubId       Int         @unique
   title          String
   body           String?
   url            String
   issueCreatedAt DateTime
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  repository     Repository? @relation(fields: [repositoryId], references: [id])
+  repositoryId   String?
 }
