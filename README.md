@@ -256,6 +256,18 @@ Below are the prompts I've used:
 - perform the same enhancements on the analyze controller, and also refactor/remove the initial repo input validation since it is already present in the repoNameFormat middleware
 - generate the readme file by scanning my entire project
 
+## Frequently asked questions
+
+- #### Why did I choose SQLite over in-memory or JSON file-based storage options?
+
+  - In-memory storage option was not chosen because I wanted the data to be persisted and not to be cleared out whenever the server restarts.
+  - JSON file-based storage option was not chosen because of the following reasons:
+    - **File size**: As the size of the issues would grow, so would the size of the issues JSON file. It then would have to be loaded entirely in the memory to be queried over.
+    - **Query performance**: SQLite maintains performance through indexes and when querying data over multiple tables using `JOIN`'s, it's much better than using multiple JSON files or multiple arrays and performing combined operations.
+
+- #### How can the performance of the analyze step be improved?
+  - I've raised an [issue](https://github.com/rishabhdx/github-issue-analyzer/issues/1) for the same and described can the performance can be improved.
+
 ## License
 
 ISC
