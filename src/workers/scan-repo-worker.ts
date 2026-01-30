@@ -29,10 +29,10 @@ async function scanRepository(message: ScanJobMessage) {
       }
     });
 
-    console.log(
-      `[Worker] Checking if ${owner}/${repoName} already exists in database`,
-      doesRepoAlreadyExist
-    );
+    // console.log(
+    //   `[Worker] Checking if ${owner}/${repoName} already exists in database`,
+    //   doesRepoAlreadyExist
+    // );
 
     if (doesRepoAlreadyExist) {
       jobQueue.updateJobStatus(jobId, "completed", {
