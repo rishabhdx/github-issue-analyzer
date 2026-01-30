@@ -5,6 +5,7 @@ import "dotenv/config";
 
 import { scanRouter } from "./routes/scan";
 import { analyzeRouter } from "./routes/analyze";
+import { keyRouter } from "./routes/key";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.get("/", (_, res) => {
   res.send("Welcome to the GitHub Issue Analyzer!");
 });
 
+app.use(keyRouter);
 app.use(scanRouter);
 app.use(analyzeRouter);
 

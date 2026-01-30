@@ -10,6 +10,12 @@ datasource db {
   provider = "sqlite"
 }
 
+model APIKeys {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  createdAt DateTime @default(now())
+}
+
 model Repository {
   id     String  @id @default(cuid())
   owner  String
